@@ -1,20 +1,60 @@
 package com.example.usjtads3anmcabusca_fila_resultado;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaChamadoActivity extends AppCompatActivity {
+    public static final String DESCRICAO =
+            "br.usjt.deswebmob.servicedesk.descricao";
     ArrayList<String> lista;
+
+    private ListView chamadosListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_chamado);
+        chamadosListView = findViewById(R.id.chamadosListView);
+        Intent origemIntent = getIntent();
+        String nomeFila = origemIntent.getStringExtra("nome_fila");
+        final List<String> chamados = busca(nomeFila);
+        ArrayAdapter <String> adapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, chamados);
+        chamadosListView.setAdapter(adapter);
+        chamadosListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String chamadoSelecionado = chamados.get(position);
+                Intent intent = new Intent(ListaChamadoActivity.this, DetalhesChamadoActivity.class);
+                intent.putExtra("chamado_selecionado", chamadoSelecionado);
+                startActivity(intent);
+            }
+        });
     }
 
-    
+    public List<String> busca(String nomeFila) {
+        List <String> chamados = geraListaChamados();
+
+        if (nomeFila == null || nomeFila.length() == 0)
+            return chamados;
+        List<String> resultado = new ArrayList<>();
+        for(String chamado: chamados) {
+            if(chamado.toLowerCase().contains(nomeFila.toLowerCase())) {
+                resultado.add(chamado);
+            }
+        }
+        return resultado;
+    }
 
     public ArrayList<String> geraListaChamados(){
         ArrayList<String> lista = new ArrayList<>();
