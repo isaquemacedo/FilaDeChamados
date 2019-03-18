@@ -7,18 +7,5 @@
     android:layout_height="match_parent"
     tools:context=".DetalhesChamadoActivity"
     android:orientation="vertical">
-
-    <TextView
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:id="@+id/nomeFilaTextView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-    <TextView
-        android:textAppearance="@style/AlertDialog.AppCompat.Light"
-        android:id="@+id/descricaoChamadoTextView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+    <include layout="@layout/list_item"/>
 </LinearLayout>
