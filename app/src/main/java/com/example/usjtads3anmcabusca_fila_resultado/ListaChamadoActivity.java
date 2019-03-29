@@ -1,14 +1,12 @@
 package com.example.usjtads3anmcabusca_fila_resultado;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,20 +17,22 @@ public class ListaChamadoActivity extends AppCompatActivity {
             "br.usjt.deswebmob.servicedesk.descricao";
     ArrayList<String> lista;
 
-    private ListView chamadosListView;
+    private RecyclerView chamadosRecycleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_chamado);
-        chamadosListView = findViewById(R.id.chamadosListView);
+        chamadosRecycleView = findViewById(R.id.chamadosListView);
         Intent origemIntent = getIntent();
         String nomeFila = origemIntent.getStringExtra("nome_fila");
         final List<Chamado> chamados = busca(nomeFila);
-        ChamadoArrayAdapter adapter =
-                new ChamadoArrayAdapter(this, chamados);
-        chamadosListView.setAdapter(adapter);
-        chamadosListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        /* ChamadoArrayAdapter adapter =
+                new ChamadoArrayAdapter(this, chamados); */
+        chamadosRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        ChamadoRecyclerViewAdapter adapter = new ChamadoRecyclerViewAdapter(chamados);
+        chamadosRecycleView.setAdapter(adapter);
+        /* chamadosRecycleView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Chamado chamadoSelecionado = chamados.get(position);
@@ -40,7 +40,7 @@ public class ListaChamadoActivity extends AppCompatActivity {
                 intent.putExtra("chamado_selecionado", chamadoSelecionado);
                 startActivity(intent);
             }
-        });
+        }); */
     }
 
     public List<Chamado> busca (String nomeFila){

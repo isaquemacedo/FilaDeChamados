@@ -7,10 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".ListaChamadoActivity">
 
-    <ListView
-        android:id="@+id/chamadosListView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chamadosRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fastScrollAlwaysVisible="true"/>
+        android:fastScrollEnabled="true"
+        android:scrollbars="vertical"/>
 
 </LinearLayout>
