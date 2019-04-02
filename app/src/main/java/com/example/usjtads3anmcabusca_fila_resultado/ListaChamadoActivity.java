@@ -23,7 +23,7 @@ public class ListaChamadoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_chamado);
-        chamadosRecycleView = findViewById(R.id.chamadosListView);
+        chamadosRecycleView = findViewById(R.id.chamadosRecyclerView);
         Intent origemIntent = getIntent();
         String nomeFila = origemIntent.getStringExtra("nome_fila");
         final List<Chamado> chamados = busca(nomeFila);
