@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         nomeFilaEditText = findViewById(R.id.nomeFilaEditText);
 
-        Log.i("INSERT", HelpDeskContract.insertFilas());
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

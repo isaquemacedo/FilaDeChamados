@@ -8,6 +8,7 @@ public class Chamado implements Serializable {
     private Date dataAbertura;
     private Date dataFechamento;
     private String status;
+    private int id;
 
     public Chamado(Fila fila, String descricao, Date dataAbertura, Date dataFechamento, String status) {
         this.fila = fila;
@@ -15,6 +16,15 @@ public class Chamado implements Serializable {
         this.dataAbertura = dataAbertura;
         this.dataFechamento = dataFechamento;
         this.status = status;
+    }
+
+    public Chamado(int id, Fila fila, String descricao, Date dataAbertura, Date dataFechamento, String status) {
+        this.fila = fila;
+        this.descricao = descricao;
+        this.dataAbertura = dataAbertura;
+        this.dataFechamento = dataFechamento;
+        this.status = status;
+        this.id = id;
     }
 
     public Fila getFila() {
@@ -47,6 +57,8 @@ public class Chamado implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
     @Override
     public String toString() {

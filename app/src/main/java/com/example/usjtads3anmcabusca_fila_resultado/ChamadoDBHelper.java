@@ -15,8 +15,17 @@ public class ChamadoDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(HelpDeskContract.createTableFila());
         db.execSQL(HelpDeskContract.createTableChamado());
+        db.execSQL(HelpDeskContract.insertFilas());
+        db.execSQL(HelpDeskContract.insertChamados());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {}
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        db.execSQL(HelpDeskContract.ChamadoContract.DROP_TABLE);
+        db.execSQL(HelpDeskContract.FilaContract.DROP_TABLE);
+        onCreate(db);
+    }
 }
